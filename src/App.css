@@ -37,6 +37,7 @@ body {
 
 .product-box {
   width: 100%;
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
