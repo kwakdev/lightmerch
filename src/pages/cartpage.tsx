@@ -8,6 +8,8 @@ import {
   updateCartItemQuantity,
 } from "../utils/cart";
 
+const SHOPIFY_STORE_URL = "https://lighteditsmerch.myshopify.com";
+
 function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
@@ -28,6 +30,16 @@ function CartPage() {
 
   const totalItems = useMemo(() => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
+  }, [cartItems]);
+
+  const shopifyCheckoutUrl = useMemo(() => {
+    if (cartItems.length === 0) return "#";
+
+    const lineItems = cartItems
+      .map((item) => `${item.variantId}:${item.quantity}`)
+      .join(",");
+
+    return `${SHOPIFY_STORE_URL}/cart/${lineItems}`;
   }, [cartItems]);
 
   const handleDecrease = (item: CartItem) => {
@@ -69,10 +81,7 @@ function CartPage() {
                   </div>
                 ) : (
                   cartItems.map((item) => (
-                    <div
-                      className="cart-item"
-                      key={`${item.id}-${item.size}`}
-                    >
+                    <div className="cart-item" key={`${item.id}-${item.size}`}>
                       <div className="cart-item-image-wrap">
                         <img
                           src={item.image}
@@ -84,7 +93,7 @@ function CartPage() {
                       <div className="cart-item-details">
                         <h2 className="cart-item-title">{item.name}</h2>
                         <p className="cart-item-meta">Size: {item.size}</p>
-                       
+
                         <p className="cart-item-price">
                           ${(item.price * item.quantity).toFixed(2)}
                         </p>
@@ -154,8 +163,8 @@ function CartPage() {
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
 
-                <Link
-                  to="/checkout"
+                <a
+                  href={shopifyCheckoutUrl}
                   className={`add-to-bag checkout-link ${
                     cartItems.length === 0 ? "disabled-link" : ""
                   }`}
@@ -164,7 +173,7 @@ function CartPage() {
                   }}
                 >
                   Proceed to Checkout
-                </Link>
+                </a>
 
                 <Link to="/" className="secondary-link">
                   Continue Shopping

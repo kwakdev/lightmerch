@@ -5,6 +5,7 @@ export type CartItem = {
   image: string;
   size: string;
   quantity: number;
+  variantId: string;
 };
 
 const CART_KEY = "lightedits_cart";
@@ -33,7 +34,10 @@ export function addToCart(newItem: CartItem) {
   const cart = getCart();
 
   const existingIndex = cart.findIndex(
-    (item) => item.id === newItem.id && item.size === newItem.size
+    (item) =>
+      item.id === newItem.id &&
+      item.size === newItem.size &&
+      item.variantId === newItem.variantId
   );
 
   if (existingIndex !== -1) {
@@ -45,7 +49,11 @@ export function addToCart(newItem: CartItem) {
   saveCart(cart);
 }
 
-export function updateCartItemQuantity(id: string, size: string, quantity: number) {
+export function updateCartItemQuantity(
+  id: string,
+  size: string,
+  quantity: number
+) {
   const cart = getCart()
     .map((item) =>
       item.id === id && item.size === size ? { ...item, quantity } : item
@@ -67,5 +75,8 @@ export function clearCart() {
 }
 
 export function getCartSubtotal(): number {
-  return getCart().reduce((total, item) => total + item.price * item.quantity, 0);
+  return getCart().reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 }
