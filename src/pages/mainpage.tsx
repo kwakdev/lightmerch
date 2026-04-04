@@ -10,12 +10,13 @@ const hoodieImages = [
   "/hoodie.png",
 ];
 
-const sizes = ["S", "M", "L"];
+const sizes = ["S", "M", "L","XL"];
 
 const variantMap: Record<string, string> = {
-  S: "45980777185476",
-  M: "45980777218244",
-  L: "45980777251012",
+  S: "46029714522309",
+  M: "46029714555077",
+  L: "46029714587845",
+  XL: "46029714620613",
 };
 
 function MainPage() {
@@ -172,6 +173,9 @@ function MainPage() {
               </svg>
             </a>
           </div>
+          <div className="footer-text">
+  made by 519software.com
+</div>
         </div>
       </div>
     </div>

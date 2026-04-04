@@ -8,7 +8,7 @@ import {
   updateCartItemQuantity,
 } from "../utils/cart";
 
-const SHOPIFY_STORE_URL = "https://lighteditsmerch.myshopify.com";
+const SHOPIFY_STORE_URL = "https://lightedits-2.myshopify.com";
 
 function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);

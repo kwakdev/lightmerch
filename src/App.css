@@ -34,7 +34,20 @@ body {
   width: min(1080px, 100%);
   margin: 0 auto;
 }
-
+.footer-text {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  font-size: 12px;
+  color: white;
+  opacity: 0.7;
+  text-align: center;
+  letter-spacing: 0.5px;
+  
+  pointer-events: none; /* prevents blocking clicks */
+}
 .product-box {
   width: 100%;
   position: relative;

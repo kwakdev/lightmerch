@@ -8,7 +8,7 @@ export type CartItem = {
   variantId: string;
 };
 
-const CART_KEY = "lightedits_cart";
+const CART_KEY = "lightedits_cart3";
 
 export function getCart(): CartItem[] {
   try {
