@@ -173,9 +173,7 @@ function MainPage() {
               </svg>
             </a>
           </div>
-          <div className="footer-text">
-  made by 519software.com
-</div>
+     
         </div>
       </div>
     </div>
