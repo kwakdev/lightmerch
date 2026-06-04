@@ -4,10 +4,12 @@ import "../App.css";
 import { addToCart, getCartCount } from "../utils/cart";
 
 const hoodieImages = [
-  "/hoodie.png",
-  "/hoodie.png",
-  "/hoodie.png",
-  "/hoodie.png",
+  "/1.JPG",
+  "/2.JPG",
+  "/3.JPG",
+  "/4.JPG",
+  "/5.JPG",
+  "/6.JPG",
 ];
 
 const sizes = ["S", "M", "L","XL"];
@@ -110,7 +112,7 @@ function MainPage() {
             <div className="info-column">
               <p className="product-label">LIGHTEDITS</p>
               <h1 className="product-title">Lightedits Official Hoodie</h1>
-              <p className="product-price">$69.00</p>
+              <p className="product-price">$79.99 USD</p>
 
               <div className="size-section">
                 <p className="section-title">Select Size</p>
