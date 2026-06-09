@@ -29,6 +29,7 @@ const features = [
   "Drop Shoulder",
   "100% French Terry Cotton",
   "420 GSM",
+  
 ];
 
 function MainPage() {
@@ -36,6 +37,7 @@ function MainPage() {
   const [selectedSize, setSelectedSize] = useState("L");
   const [cartCount, setCartCount] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
 
   const navigate = useNavigate();
 
@@ -158,14 +160,7 @@ function MainPage() {
               <p className="product-label">LIGHTEDITS</p>
               <h1 className="product-title">Hikari Limited Zip Hoodie</h1>
               <p className="product-price">$79.99 USD</p>
-
-              <p className="product-limited-tag">⚡ Limited to 50 pieces</p>
-
-              <ul className="product-features">
-                {features.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+              <p className="product-limited-tag">Only 50 Units Made</p>
 
               <div className="size-section">
                 <p className="section-title">Select Size</p>
@@ -186,6 +181,24 @@ function MainPage() {
               <button className="add-to-bag" type="button" onClick={handleAddToBag}>
                 Add to Bag
               </button>
+
+              <div className="features-section">
+                <button
+                  className="show-more-btn"
+                  type="button"
+                  onClick={() => setShowFeatures((prev) => !prev)}
+                >
+                  {showFeatures ? "Show less ▲" : "Show more ▼"}
+                </button>
+
+                {showFeatures && (
+                  <ul className="product-features">
+                    {features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
 
