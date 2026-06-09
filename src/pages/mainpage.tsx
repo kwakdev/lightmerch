@@ -204,10 +204,9 @@ function MainPage() {
             </div>
 
             <div className="info-column">
-              <p className="product-label">LIGHTEDITS</p>
               <h1 className="product-title">Hikari Limited Zip Hoodie</h1>
               <p className="product-price">$79.99 USD</p>
-              <p className="product-limited-tag">Only 50 Units Made</p>
+              <p className="product-limited-tag">Only 50 Made</p>
 
               <div className="size-section">
                 <p className="section-title">Select Size</p>
