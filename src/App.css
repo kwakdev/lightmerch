@@ -235,16 +235,16 @@ body {
 
 .product-features li {
   font-size: 0.8rem;
-  color: #bbb;
-  padding-left: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  padding-left: 14px;
   position: relative;
 }
 
 .product-features li::before {
-  content: "—";
+  content: "-";
   position: absolute;
   left: 0;
-  color: #555;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .size-section {
