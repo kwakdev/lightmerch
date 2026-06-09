@@ -29,6 +29,7 @@ const features = [
   "Drop Shoulder",
   "100% French Terry Cotton",
   "420 GSM",
+  
 ];
 
 function MainPage() {
@@ -159,7 +160,7 @@ function MainPage() {
               <p className="product-label">LIGHTEDITS</p>
               <h1 className="product-title">Hikari Limited Zip Hoodie</h1>
               <p className="product-price">$79.99 USD</p>
-              <p className="product-limited-tag">Limited to 50 pieces</p>
+              <p className="product-limited-tag">Only 50 Units Made</p>
 
               <div className="size-section">
                 <p className="section-title">Select Size</p>
