@@ -188,7 +188,7 @@ function MainPage() {
                   type="button"
                   onClick={() => setShowFeatures((prev) => !prev)}
                 >
-                  {showFeatures ? "Show less ▲" : "Show more ▼"}
+                  {showFeatures ? "Hide Description ▲" : "Show Description ▼"}
                 </button>
 
                 {showFeatures && (
