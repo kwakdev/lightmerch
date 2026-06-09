@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { addToCart, getCartCount } from "../utils/cart";
@@ -29,7 +29,6 @@ const features = [
   "Drop Shoulder",
   "100% French Terry Cotton",
   "420 GSM",
-  
 ];
 
 function MainPage() {
@@ -38,6 +37,10 @@ function MainPage() {
   const [cartCount, setCartCount] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const dragRef = useRef<{ startX: number; startY: number; panX: number; panY: number } | null>(null);
 
   const navigate = useNavigate();
 
@@ -55,6 +58,39 @@ function MainPage() {
     if (lightboxOpen) window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [lightboxOpen]);
+
+  useEffect(() => {
+    if (!lightboxOpen) {
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+    }
+  }, [lightboxOpen]);
+
+  useEffect(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }, [selectedImage]);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    setZoom((prev) => Math.min(Math.max(prev - e.deltaY * 0.001, 1), 5));
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom <= 1) return;
+    setIsPanning(true);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, panX: pan.x, panY: pan.y };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isPanning || !dragRef.current) return;
+    setPan({
+      x: dragRef.current.panX + (e.clientX - dragRef.current.startX),
+      y: dragRef.current.panY + (e.clientY - dragRef.current.startY),
+    });
+  };
+
+  const handleMouseUp = () => setIsPanning(false);
 
   const handleAddToBag = () => {
     const variantId = variantMap[selectedSize];
@@ -87,6 +123,10 @@ function MainPage() {
           role="dialog"
           aria-modal="true"
           aria-label="Enlarged product image"
+          onWheel={handleWheel}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
           <button
             className="lightbox-close"
@@ -96,11 +136,18 @@ function MainPage() {
           >
             ✕
           </button>
+          <div className="lightbox-zoom-hint">Scroll to zoom · Drag to pan</div>
           <img
             src={selectedImage}
             alt="Hikari Limited Zip Hoodie enlarged"
             className="lightbox-image"
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              cursor: zoom > 1 ? (isPanning ? "grabbing" : "grab") : "zoom-in",
+              transition: isPanning ? "none" : "transform 0.15s ease",
+            }}
             onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => { e.stopPropagation(); handleMouseDown(e); }}
           />
         </div>
       )}
