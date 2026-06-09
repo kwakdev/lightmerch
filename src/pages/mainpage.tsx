@@ -63,7 +63,7 @@ function MainPage() {
     addToCart({
       id: "lightedits-official-hoodie",
       name: "Hikari Limited Zip Hoodie",
-      price: 69,
+      price: 79.99,
       image: selectedImage,
       size: selectedSize,
       quantity: 1,
