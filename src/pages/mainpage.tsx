@@ -23,8 +23,8 @@ const variantMap: Record<string, string> = {
 
 const features = [
   "UV Light Embroidered Lightning",
-  "Seamless stitching",
-  "Boxy and slightly cropped fit",
+  "Seamless Stitching",
+  "Boxy and Slightly Cropped Fit",
   "Y2K Zipper",
   "Drop Shoulder",
   "100% French Terry Cotton",
