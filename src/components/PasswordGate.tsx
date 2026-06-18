@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import "../App.css"; // reuse existing site styles
 
 const CORRECT_PASSWORD = "earlycircle";
@@ -13,6 +14,8 @@ export default function PasswordGate({ children }: PasswordGateProps) {
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
+
+  const [formState, handleEmailSubmit] = useForm("mjgdqjrq");
 
   useEffect(() => {
     if (sessionStorage.getItem(STORAGE_KEY) === "true") {
@@ -48,7 +51,6 @@ export default function PasswordGate({ children }: PasswordGateProps) {
       <div className="overlay">
         <img src="/logo.png" alt="Lightedits logo" className="logo" />
 
-        {/* Centering wrapper — overrides whatever content-wrap does */}
         <div style={{
           display: "flex",
           flex: 1,
@@ -56,30 +58,68 @@ export default function PasswordGate({ children }: PasswordGateProps) {
           justifyContent: "center",
           width: "100%",
         }}>
-          <div className={`password-box${shake ? " password-shake" : ""}`}>
-            <p className="password-eyebrow">EARLY ACCESS</p>
-            <p className="password-sub">Enter the password to continue</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "360px" }}>
+<div className={`password-box${shake ? " password-shake" : ""}`}>
+              <p className="password-eyebrow">EARLY ACCESS</p>
+              <p className="password-sub">Enter the password to continue</p>
 
-            <input
-              type="password"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Password"
-              autoFocus
-              className={`password-input${error ? " password-input--error" : ""}`}
-            />
+              <input
+                type="password"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Password"
+                autoFocus
+                className={`password-input${error ? " password-input--error" : ""}`}
+              />
 
-            {error && <p className="password-error">Incorrect password</p>}
+              {error && <p className="password-error">Incorrect password</p>}
 
-            <button
-              onClick={handleSubmit}
-              className="add-to-bag"
-              type="button"
-              style={{ marginTop: "8px", width: "100%" }}
-            >
-              Enter
-            </button>
+              <button
+                onClick={handleSubmit}
+                className="add-to-bag"
+                type="button"
+                style={{ marginTop: "8px", width: "100%" }}
+              >
+                Enter
+              </button>
+            </div>
+            {/* ── Email notify box ── */}
+            <div className="password-box" style={{ padding: "28px 40px" }}>
+              <p className="password-eyebrow">STAY IN THE LOOP</p>
+              <p className="password-sub" style={{ textAlign: "center" }}>
+                Get notified when we launch
+              </p>
+
+              {formState.succeeded ? (
+                <p className="email-success">You're on the list ✓</p>
+              ) : (
+                <form onSubmit={handleEmailSubmit} style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
+                  <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="your@email.com"
+                      className="password-input"
+                      style={{ flex: 1 }}
+                    />
+                    <button
+                      type="submit"
+                      disabled={formState.submitting}
+                      className="notify-btn"
+                    >
+                      {formState.submitting ? "…" : "Notify me"}
+                    </button>
+                  </div>
+                  <ValidationError prefix="Email" field="email" errors={formState.errors} className="password-error" />
+                </form>
+              )}
+            </div>
+
+            {/* ── Password box ── */}
+            
+
           </div>
         </div>
       </div>
@@ -95,10 +135,10 @@ export default function PasswordGate({ children }: PasswordGateProps) {
           border-radius: 16px;
           padding: 48px 40px;
           width: 100%;
-          max-width: 360px;
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
           animation: fadeInUp 0.5s ease both;
+          box-sizing: border-box;
         }
 
         @keyframes fadeInUp {
@@ -165,6 +205,36 @@ export default function PasswordGate({ children }: PasswordGateProps) {
           margin: 0;
           color: #ff6666;
           font-size: 12px;
+        }
+
+        .email-success {
+          margin: 0;
+          color: rgba(160, 255, 180, 0.85);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .notify-btn {
+          padding: 12px 16px;
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          color: #fff;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background 0.2s, border-color 0.2s;
+        }
+
+        .notify-btn:hover:not(:disabled) {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .notify-btn:disabled {
+          opacity: 0.5;
+          cursor: default;
         }
       `}</style>
     </div>
