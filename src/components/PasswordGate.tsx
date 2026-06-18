@@ -86,7 +86,6 @@ export default function PasswordGate({ children }: PasswordGateProps) {
             </div>
             {/* ── Email notify box ── */}
             <div className="password-box" style={{ padding: "28px 40px" }}>
-              <p className="password-eyebrow">STAY IN THE LOOP</p>
               <p className="password-sub" style={{ textAlign: "center" }}>
                 Get notified when we launch
               </p>
