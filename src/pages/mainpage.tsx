@@ -11,7 +11,12 @@ const hoodieImages = [
   "/5.JPG",
   "/6.JPG",
 ];
-
+const stock: Record<string, number | null> = {
+  S: null,
+  M: null,
+  L: 2,
+  XL: null,
+};
 const sizes = ["S", "M", "L", "XL"];
 
 const variantMap: Record<string, string> = {
@@ -211,16 +216,21 @@ function MainPage() {
               <div className="size-section">
                 <p className="section-title">Select Size</p>
                 <div className="size-grid">
-                  {sizes.map((size) => (
-                    <button
-                      key={size}
-                      className={`size-box ${selectedSize === size ? "active" : ""}`}
-                      onClick={() => setSelectedSize(size)}
-                      type="button"
-                    >
-                      {size}
-                    </button>
-                  ))}
+  {sizes.map((size) => (
+    <div key={size} className="size-option">
+      <button
+        className={`size-box ${selectedSize === size ? "active" : ""}`}
+        onClick={() => setSelectedSize(size)}
+        type="button"
+      >
+        {size}
+      </button>
+      {stock[size] !== null && (
+        <span className="size-stock-warning">Only {stock[size]} left</span>
+      )}
+    </div>
+  ))}
+</div>
                 </div>
               </div>
 
@@ -268,7 +278,6 @@ function MainPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

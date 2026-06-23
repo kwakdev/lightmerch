@@ -28,7 +28,21 @@ body {
   justify-content: center;
   overflow: hidden;
 }
+.size-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
 
+.size-stock-warning {
+  font-size: 0.62rem;
+  color: #ff6b6b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  white-space: nowrap;
+}
 .lightbox-image {
   max-width: 90vw;
   max-height: 90vh;
