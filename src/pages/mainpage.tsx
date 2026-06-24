@@ -14,7 +14,7 @@ const hoodieImages = [
 const stock: Record<string, number | null> = {
   S: null,
   M: null,
-  L: 1,
+  L: 0,
   XL: null,
 };
 const sizes = ["S", "M", "L", "XL"];
