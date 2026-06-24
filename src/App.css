@@ -6,6 +6,24 @@
 body {
   font-family: 'Satoshi', sans-serif;
 }
+.size-box.sold-out {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  border-color: #555;
+  color: #888;
+}
+
+.size-sold-out-label {
+  font-size: 0.65rem;
+  color: #ff4444;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  display: block;
+  text-align: center;
+}
+
 .bg-video {
   position: fixed;
   top: 0;
