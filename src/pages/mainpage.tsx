@@ -38,7 +38,7 @@ const features = [
 
 function MainPage() {
   const [selectedImage, setSelectedImage] = useState(hoodieImages[0]);
-  const [selectedSize, setSelectedSize] = useState("L");
+  const [selectedSize, setSelectedSize] = useState("M");
   const [cartCount, setCartCount] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
@@ -216,21 +216,27 @@ function MainPage() {
               <div className="size-section">
                 <p className="section-title">Select Size</p>
                 <div className="size-grid">
-  {sizes.map((size) => (
-    <div key={size} className="size-option">
-      <button
-        className={`size-box ${selectedSize === size ? "active" : ""}`}
-        onClick={() => setSelectedSize(size)}
-        type="button"
-      >
-        {size}
-      </button>
-      {stock[size] !== null && (
-        <span className="size-stock-warning">Only {stock[size]} left</span>
-      )}
-    </div>
-  ))}
-</div>
+                  {sizes.map((size) => {
+                    const isSoldOut = stock[size] === 0;
+                    return (
+                      <div key={size} className="size-option">
+                        <button
+                          className={`size-box ${selectedSize === size && !isSoldOut ? "active" : ""} ${isSoldOut ? "sold-out" : ""}`}
+                          onClick={() => !isSoldOut && setSelectedSize(size)}
+                          type="button"
+                          disabled={isSoldOut}
+                          aria-label={isSoldOut ? `${size} - Sold Out` : `Select size ${size}`}
+                        >
+                          {size}
+                        </button>
+                        {isSoldOut ? (
+                          <span className="size-sold-out-label">Sold Out</span>
+                        ) : stock[size] !== null && (
+                          <span className="size-stock-warning">Only {stock[size]} left</span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -278,6 +284,7 @@ function MainPage() {
           </div>
         </div>
       </div>
+    </div>
   );
 }
 
