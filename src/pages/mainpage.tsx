@@ -15,7 +15,7 @@ const stock: Record<string, number | null> = {
   S: null,
   M: null,
   L: 0,
-  XL: 1,
+  XL: 0,
 };
 const sizes = ["S", "M", "L", "XL"];
 
