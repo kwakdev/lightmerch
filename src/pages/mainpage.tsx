@@ -12,8 +12,8 @@ const hoodieImages = [
   "/6.JPG",
 ];
 const stock: Record<string, number | null> = {
-  S: null,
-  M: null,
+  S: 7,
+  M: 5,
   L: 0,
   XL: 0,
 };
