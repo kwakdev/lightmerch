@@ -13,7 +13,7 @@ const hoodieImages = [
 ];
 const stock: Record<string, number | null> = {
   S: null,
-  M: 2,
+  M: 1,
   L: 0,
   XL: 0,
 };
