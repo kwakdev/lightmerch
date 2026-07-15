@@ -105,7 +105,7 @@ function MainPage() {
     }
     addToCart({
       id: "lightedits-official-hoodie",
-      name: "Hikari Limited Zip Hoodie",
+      name: "Hikari Limited Zip Hoodie hi  guys its kwak",
       price: 79.99,
       image: selectedImage,
       size: selectedSize,
